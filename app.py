@@ -14,7 +14,6 @@ st.title("📋 Dashboard Gestione Esami Open Badge")
 # === CREDENZIALI GOOGLE ===
 # Inserisci il JSON delle credenziali di Service Account in st.secrets sotto "google" -> "credentials" (stringa JSON)
 creds_json_str = st.secrets["google"]["credentials"]
-st.write("DEBUG: creds_json_str =", repr(creds_json_str))
 creds_dict = json.loads(creds_json_str)  # qui fallisce se JSON non valido
 credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=['https://www.googleapis.com/auth/drive.readonly'])
 drive_service = build('drive', 'v3', credentials=credentials)
