@@ -1,0 +1,6 @@
+streamlit
+streamlit-authenticator
+gspread
+oauth2client
+PyYAML
+pandas
