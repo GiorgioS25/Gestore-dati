@@ -23,7 +23,7 @@ if not st.session_state.authenticated:
     if st.button("Login"):
         if username in VALID_USERS and VALID_USERS[username] == password:
             st.session_state.authenticated = True
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("❌ Credenziali non valide.")
 
