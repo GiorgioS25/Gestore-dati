@@ -193,14 +193,10 @@ if files:
         )
 else:
     st.info("🔎 Inserisci l'ID di una cartella Drive pubblica contenente file .xlsx e seleziona i file da analizzare")
-
-# ✅ Firma sempre visibile
 st.markdown(
     """
-    <br>
-    <br>
-    <br>
-    <div style='margin-top: 40px; font-size: 0.8em; color: gray;'>
+    <br><br><br>
+    <div style='margin-top: 40px; font-size: 0.8em; color: gray; text-align: right;'>
         V.2.5.0 Created By <span style='color: red;'>Giorgio Sangiorgi</span><br>
         V.2.0.0 Powered by Google Drive API
     </div>
