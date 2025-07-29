@@ -8,10 +8,7 @@ from googleapiclient.http import MediaIoBaseDownload
 import json
 
 # === LOGIN MANUALE ===
-VALID_USERS = {
-    "admin": "password123",
-    "giorgio": "badge2025"
-}
+VALID_USERS = st.secrets["users"]
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -26,10 +23,11 @@ if not st.session_state.authenticated:
     if st.button("Login"):
         if username in VALID_USERS and VALID_USERS[username] == password:
             st.session_state.authenticated = True
-            st.experimental_rerun()
         else:
             st.error("❌ Credenziali non valide.")
-    st.stop()
+
+    if not st.session_state.authenticated:
+        st.stop()
 
 # === CONFIGURAZIONE STREAMLIT ===
 st.set_page_config(page_title="Dashboard Gestione Esami Open Badge", layout="wide")
