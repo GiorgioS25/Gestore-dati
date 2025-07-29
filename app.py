@@ -17,27 +17,29 @@ if not st.session_state.authenticated:
     st.set_page_config(page_title="Login", layout="centered")
     st.title("🔒 Login richiesto")
 
-    username = st.text_input("Nome utente", key="username")
-    password = st.text_input("Password", type="password", key="password")
+    username = st.text_input("Nome utente")
+    password = st.text_input("Password", type="password")
 
     if st.button("Login"):
         if username in VALID_USERS and VALID_USERS[username] == password:
             st.session_state.authenticated = True
-            st.rerun()
+            st.experimental_rerun()
         else:
             st.error("❌ Credenziali non valide.")
 
-    # Blocca l'esecuzione sotto fino a nuovo login
-    st.stop()
+    if not st.session_state.authenticated:
+        st.stop()
 
-# === CONFIGURAZIONE STREAMLIT DOPO LOGIN ===
-st.set_page_config(page_title="Dashboard Gestione Esami Open Badge", layout="wide")
-st.title("📋 Dashboard Gestione Esami Open Badge")
+# Siamo autenticati qui in poi
 
-# Pulsante logout
+# Bottone logout
 if st.button("Logout"):
     st.session_state.authenticated = False
     st.experimental_rerun()
+
+# === CONFIGURAZIONE STREAMLIT ===
+st.set_page_config(page_title="Dashboard Gestione Esami Open Badge", layout="wide")
+st.title("📋 Dashboard Gestione Esami Open Badge")
 
 # === CREDENZIALI GOOGLE ===
 creds_json_str = st.secrets["google"]["credentials"]
