@@ -195,15 +195,20 @@ else:
     st.info("🔎 Inserisci l'ID di una cartella Drive pubblica contenente file .xlsx e seleziona i file da analizzare")
 st.markdown(
     """
-    <div style='
-        font-size: 0.8em;
+    <div style="
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-size: 0.75em;
         color: gray;
+        opacity: 0.6;
+        pointer-events: none;
+        user-select: none;
+        max-width: 250px;
         text-align: right;
-        margin-top: 20px;
-        margin-bottom: 0;
-        padding-bottom: 0;
-        line-height: 1.1;
-    '>
+        line-height: 1.2;
+        z-index: 9999;
+    ">
         V.2.5.0 Created By <span style='color: red;'>Giorgio Sangiorgi</span><br>
         V.2.0.0 Powered by Google Drive API
     </div>
