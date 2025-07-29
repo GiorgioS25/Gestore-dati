@@ -208,7 +208,7 @@ else:
 st.markdown(
     """
     <div style='position: fixed; bottom: 0; left: 0; padding: 10px; font-size: 0.8em; color: gray;'>
-        V.2.0.2 Created By <span style='color: red;'>Giorgio Sangiorgi</span><br>
+        V.2.5.0 Created By <span style='color: red;'>Giorgio Sangiorgi</span><br>
         V.2.0.0 Powered by Google Drive API
     </div>
     """,
