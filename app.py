@@ -7,15 +7,40 @@ from googleapiclient.discovery import build
 from googleapiclient.http import MediaIoBaseDownload
 import json
 
-# === CONFIGURAZIONE ===
+# === LOGIN MANUALE ===
+VALID_USERS = {
+    "admin": "password123",
+    "giorgio": "badge2025"
+}
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.set_page_config(page_title="Login", layout="centered")
+    st.title("🔒 Login richiesto")
+
+    username = st.text_input("Nome utente")
+    password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if username in VALID_USERS and VALID_USERS[username] == password:
+            st.session_state.authenticated = True
+            st.experimental_rerun()
+        else:
+            st.error("❌ Credenziali non valide.")
+    st.stop()
+
+# === CONFIGURAZIONE STREAMLIT ===
 st.set_page_config(page_title="Dashboard Gestione Esami Open Badge", layout="wide")
 st.title("📋 Dashboard Gestione Esami Open Badge")
 
 # === CREDENZIALI GOOGLE ===
-# Inserisci il JSON delle credenziali di Service Account in st.secrets sotto "google" -> "credentials" (stringa JSON)
 creds_json_str = st.secrets["google"]["credentials"]
-creds_dict = json.loads(creds_json_str)  # qui fallisce se JSON non valido
-credentials = service_account.Credentials.from_service_account_info(creds_dict, scopes=['https://www.googleapis.com/auth/drive.readonly'])
+creds_dict = json.loads(creds_json_str)
+credentials = service_account.Credentials.from_service_account_info(
+    creds_dict, scopes=['https://www.googleapis.com/auth/drive.readonly']
+)
 drive_service = build('drive', 'v3', credentials=credentials)
 
 # === INPUT ID CARTELLA DRIVE ===
@@ -57,7 +82,6 @@ if files:
                 except Exception as e:
                     st.error(f"Errore nel leggere il file {f['name']}: {e}")
 
-        # --- Verifica di avere i due file necessari ---
         badge_file = next((name for name in excel_dfs if name.startswith("open_badge")), None)
         booking_file = next((name for name in excel_dfs if name.startswith("BookingsReportingData")), None)
 
@@ -68,7 +92,6 @@ if files:
         df_badge = excel_dfs[badge_file]
         df_booking = excel_dfs[booking_file]
 
-        # Normalizza colonne
         df_badge.columns = df_badge.columns.astype(str).str.strip().str.upper()
         df_booking.columns = df_booking.columns.astype(str).str.strip()
 
