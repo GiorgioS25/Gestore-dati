@@ -198,7 +198,7 @@ st.markdown(
     <div style="
         position: fixed;
         bottom: 10px;
-        right: 100px;
+        right: 150px;
         font-size: 0.75em;
         color: gray;
         opacity: 0.6;
