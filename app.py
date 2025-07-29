@@ -35,7 +35,7 @@ if not st.session_state.authenticated:
 # Bottone logout
 if st.button("Logout"):
     st.session_state.authenticated = False
-    st.experimental_rerun()
+    st.rerun()
 
 # === CONFIGURAZIONE STREAMLIT ===
 st.set_page_config(page_title="Dashboard Gestione Esami Open Badge", layout="wide")
